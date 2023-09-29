@@ -15,10 +15,11 @@ auto main(int argc, char** argv) -> int
 
         if (file.is_open()) {
             while (std::getline(file, line)) {
-                char* pline = std::strtok(&line[0], delim);
+                char* buf = &line[0];
+                char* pline = strsep(&buf, delim);
                 while (pline != NULL) {
                     fmt::print("{} : {}\n", fields[i], pline);
-                    pline = std::strtok(NULL, delim);
+                    pline = strsep(&buf, delim);
                     ++i;
                     if (i > 3) {
                         fmt::print("-------\n");
